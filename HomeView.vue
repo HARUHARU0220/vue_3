@@ -2,7 +2,18 @@
 
 import { ref } from 'vue'
 
-const restaurantList = ref([])
+/**
+ * Restaurants
+ *
+ * Name - string
+ * Status - string
+ * Address - string
+ * Dishes - array of Dish objects
+ *
+ */
+
+
+const restaurantList = ref<string[]>([]);
 const newRestaurantName = ref('')
 
 function addRestaurant() {
