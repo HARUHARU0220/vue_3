@@ -12,19 +12,32 @@ import { ref } from 'vue'
  *
  */
 
+interface Restaurant {
+  name?: string
+  address? : string
+  status? : string
+  dishes? : Dish[]
+}
 
-const restaurantList = ref<string[]>([]);
-const newRestaurantName = ref('')
+const restaurantList = ref<Restaurant[]>([])
+const newRestaurant = ref<Restaurant>({})
 
 function addRestaurant() {
-  restaurantList.value.push(newRestaurantName.value)
-
+  restaurantList.value.push({
+    name: newRestaurantName.value,
+    address: '',
+    status: '',
+    dishes: []
+  })
 }
 
 </script>
 
 <template>
   <main>
+    <pre>
+      {{ newRestaurant }}
+    </pre>
     <!---create a from that allows users to add a restaurant to a list-->
     <form @submit.prevent = "addRestaurant">
       <label for = "restaurant-name"> Restaurant Name </label>
@@ -33,8 +46,9 @@ function addRestaurant() {
       <button type = "submit">Add Restaurant</button>
     </form>
     <ul>
-      <li v-for ="restaurant in restaurantList" key="restaurant">
-        {{ restaurant }}
+      <li v-for ="restaurant in restaurantList"
+          : key="restaurant">
+        {{ restaurant.name }}
       </li>
     </ul>
   </main>
